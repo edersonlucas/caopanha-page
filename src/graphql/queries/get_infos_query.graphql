@@ -1,0 +1,9 @@
+query GetInfosSite {
+  infossite {
+    slogam
+    chavepix
+    iconqrcode {
+      url
+    }
+  }
+}

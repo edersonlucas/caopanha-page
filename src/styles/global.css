@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gradient-to-r from-yellow-300 to-yellow-500 text-black;
+  -webkit-font-smoothing: antialiased;
+}
+
+.MuiSnackbar-root > div {
+  @apply bg-red-700;
+}
+
+.MuiSnackbarContent-message {
+  @apply mx-auto;
+}
+
+canvas {
+  @apply flex-1 max-w-full max-h-[260px] rounded-lg mt-4 border-8 border-white;
+}
