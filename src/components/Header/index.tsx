@@ -1,5 +1,6 @@
 import { Dog, List, X } from "phosphor-react";
 import { useState } from "react";
+import { Link } from 'react-router-dom'
 
 function Header() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -28,18 +29,18 @@ function Header() {
           {isOpenMenu ? <X size={35} /> : <List size={35} />}
         </button>
         <nav className="hidden items-center gap-6 lg:flex">
-          <a href="#" className="hover:font-semibold">
+          <Link to="/" className="hover:font-semibold">
             Home
-          </a>
-          <a href="#" className="hover:font-semibold">
+          </Link>
+          <Link to="/animais" className="hover:font-semibold">
             Animais
-          </a>
-          <a href="#" className="hover:font-semibold">
+          </Link>
+          <Link to="/sobre" className="hover:font-semibold">
             Quem Somos
-          </a>
-          <a href="#" className="hover:font-semibold">
+          </Link>
+          <Link to="/contato" className="hover:font-semibold">
             Contato
-          </a>
+          </Link>
         </nav>
         <div
           className={`fixed left-0 bottom-[-71px] h-full w-full z-30 bg-zinc-900 bg-opacity-[99%] transform-gpu transition-all lg:hidden ${
