@@ -33,7 +33,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Cãopanha é uma página para uma ONG de ajuda aos animais, responsiva, conta com um QR code para doações atraves do pix.
 
-Na parte de gestão de conteúdo do site e alterações de algumas informações utilizei o [DatoCMS](https://www.datocms.com/).
+Na parte de administração do site e gerenciamento de conteúdos utilizei o [GraphCMS](https://graphcms.com/).
 
 ## 📝 Licença
 
