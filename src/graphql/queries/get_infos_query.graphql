@@ -1,9 +1,9 @@
 query GetInfosSite {
-  infossite {
-    slogam
-    chavepix
+  siteInfos {
+    chavePix
     iconqrcode {
-      url
+      url(transformation: {document: {output: {format: png}}})
     }
+    slogam
   }
 }

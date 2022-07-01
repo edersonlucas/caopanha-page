@@ -10,6 +10,8 @@ import Loading from "../../components/Loading";
 
 function Home() {
   const { data, loading } = useGetInfosSiteQuery();
+  console.log(data);
+  
 
   const [copyKey, setCopyKey] = useState({
     copied: false,
@@ -32,23 +34,23 @@ function Home() {
       />
       <div className="px-6 py-3 flex flex-col items-center w-full max-w-[600px] justify-center m-auto flex-initial gap-8 lg:items-start h-full z-10">
         <h2 className="text-center break-words text-3xl font-semibold lg:4xl lg:text-start">
-          {data?.infossite?.slogam}
+          {data?.siteInfos[0]?.slogam}
         </h2>
         <div className="flex flex-col gap-2 items-center w-full max-w-[270px]">
           <LogoPix />
           <QrCodeGen
             link={
-              data?.infossite?.chavepix || "https://www.instagram.com/caopanha/"
+              data?.siteInfos[0]?.chavePix || "https://www.instagram.com/caopanha/"
             }
-            icon={data?.infossite?.iconqrcode?.url}
+            icon={data?.siteInfos[0]?.iconqrcode?.url}
           />
           <span className="text-1xl">Toda e qualquer ajuda será bem vinda</span>
           <span className="bg-white text-sm mt-3 p-1 border text-center rounded border-dashed border-red-700 min:text-base">
-            {data?.infossite?.chavepix || "https://www.instagram.com/caopanha/"}
+            {data?.siteInfos[0]?.chavePix || "https://www.instagram.com/caopanha/"}
           </span>
           <CopyToClipboard
             text={
-              data?.infossite?.chavepix || "https://www.instagram.com/caopanha/"
+              data?.siteInfos[0]?.chavePix || "https://www.instagram.com/caopanha/"
             }
             onCopy={() =>
               setCopyKey({
