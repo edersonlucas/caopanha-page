@@ -23,12 +23,12 @@ function Header() {
           <h1 className="text-1xl font-bold uppercase sm:text-2xl">Cãopanha</h1>
         </div>
         <div
-          className="block hover:text-zinc-700 lg:hidden"
+          className="block hover:text-zinc-700 sm:hidden"
           onClick={openMenu}
         >
           {isOpenMenu ? <X size={35} /> : <List size={35} />}
         </div>
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-6 sm:flex">
           <Link to="/" className="hover:font-semibold">
             Home
           </Link>
@@ -43,7 +43,7 @@ function Header() {
           </Link>
         </nav>
         <div
-          className={`fixed left-0 bottom-[-71px] h-full w-full z-30 bg-zinc-900 bg-opacity-[99%] transform-gpu transition-all lg:hidden ${
+          className={`fixed left-0 bottom-[-71px] h-full w-full z-30 bg-zinc-900 bg-opacity-[99%] transform-gpu transition-all sm:hidden ${
             isOpenMenu ? "-translate-y-0" : "translate-y-full"
           }`}
         >
