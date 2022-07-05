@@ -23,10 +23,10 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - [Vite](https://vitejs.dev/)
 - ReactJS
-- [TailwindCSS](https://tailwindcss.com/)
 - TypeScript
 - [GraphQL](https://graphql.org/)
 - [ApolloGraphQL](https://www.apollographql.com/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [MaterialUI](https://mui.com/pt/)
 
 ## 💻 Projeto
