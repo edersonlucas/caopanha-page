@@ -22,12 +22,12 @@ function Header() {
           <Dog size={55} />
           <h1 className="text-1xl font-bold uppercase sm:text-2xl">Cãopanha</h1>
         </div>
-        <button
+        <div
           className="block hover:text-zinc-700 lg:hidden"
           onClick={openMenu}
         >
           {isOpenMenu ? <X size={35} /> : <List size={35} />}
-        </button>
+        </div>
         <nav className="hidden items-center gap-6 lg:flex">
           <Link to="/" className="hover:font-semibold">
             Home
@@ -48,18 +48,18 @@ function Header() {
           }`}
         >
           <nav className="h-full flex flex-col items-center justify-center gap-8 text-yellow-500 text-2xl">
-            <a href="#" className="hover:font-semibold">
+            <Link to="/" className="hover:font-semibold">
               Home
-            </a>
-            <a href="#" className="hover:font-semibold">
+            </Link>
+            <Link to="/animais" className="hover:font-semibold">
               Animais
-            </a>
-            <a href="#" className="hover:font-semibold">
+            </Link>
+            <Link to="/sobre" className="hover:font-semibold">
               Quem Somos
-            </a>
-            <a href="#" className="hover:font-semibold">
+            </Link>
+            <Link to="/contato" className="hover:font-semibold">
               Contato
-            </a>
+            </Link>
           </nav>
         </div>
       </div>

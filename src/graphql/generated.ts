@@ -47,7 +47,7 @@ export type Asset = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
-  imagePet: Array<Pet>;
+  imagemPet: Array<Pet>;
   /** System Locale field */
   locale: Locale;
   /** Get the other localizations for this document */
@@ -105,7 +105,7 @@ export type AssetHistoryArgs = {
 
 
 /** Asset system model */
-export type AssetImagePetArgs = {
+export type AssetImagemPetArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -213,7 +213,7 @@ export type AssetCreateInput = {
   fileName: Scalars['String'];
   handle: Scalars['String'];
   height?: InputMaybe<Scalars['Float']>;
-  imagePet?: InputMaybe<PetCreateManyInlineInput>;
+  imagemPet?: InputMaybe<PetCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']>;
@@ -314,9 +314,9 @@ export type AssetManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  imagePet_every?: InputMaybe<PetWhereInput>;
-  imagePet_none?: InputMaybe<PetWhereInput>;
-  imagePet_some?: InputMaybe<PetWhereInput>;
+  imagemPet_every?: InputMaybe<PetWhereInput>;
+  imagemPet_none?: InputMaybe<PetWhereInput>;
+  imagemPet_some?: InputMaybe<PetWhereInput>;
   openGraphDefaultImageSiteMetadata_every?: InputMaybe<SiteMetadataWhereInput>;
   openGraphDefaultImageSiteMetadata_none?: InputMaybe<SiteMetadataWhereInput>;
   openGraphDefaultImageSiteMetadata_some?: InputMaybe<SiteMetadataWhereInput>;
@@ -395,7 +395,7 @@ export type AssetUpdateInput = {
   fileName?: InputMaybe<Scalars['String']>;
   handle?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Float']>;
-  imagePet?: InputMaybe<PetUpdateManyInlineInput>;
+  imagemPet?: InputMaybe<PetUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']>;
@@ -621,9 +621,9 @@ export type AssetWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  imagePet_every?: InputMaybe<PetWhereInput>;
-  imagePet_none?: InputMaybe<PetWhereInput>;
-  imagePet_some?: InputMaybe<PetWhereInput>;
+  imagemPet_every?: InputMaybe<PetWhereInput>;
+  imagemPet_none?: InputMaybe<PetWhereInput>;
+  imagemPet_some?: InputMaybe<PetWhereInput>;
   mimeType?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   mimeType_contains?: InputMaybe<Scalars['String']>;
@@ -1763,6 +1763,7 @@ export type Pet = Node & {
   createdAt: Scalars['DateTime'];
   /** User that created this document */
   createdBy?: Maybe<User>;
+  date: Scalars['DateTime'];
   description: Scalars['String'];
   /** Get the document in other stages */
   documentInStages: Array<Pet>;
@@ -1770,21 +1771,23 @@ export type Pet = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
-  image: Array<Asset>;
-  name: Scalars['String'];
+  image: Asset;
+  namePet: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   scheduledIn: Array<ScheduledOperation>;
-  slug?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
+  specie: Specie;
   /** System stage field */
   stage: Stage;
-  tags: Array<Scalars['String']>;
+  summary: Scalars['String'];
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+  whatsapp: Scalars['String'];
 };
 
 
@@ -1808,14 +1811,7 @@ export type PetHistoryArgs = {
 
 
 export type PetImageArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<AssetOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<AssetWhereInput>;
 };
 
 
@@ -1858,12 +1854,15 @@ export type PetConnection = {
 
 export type PetCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  date: Scalars['DateTime'];
   description: Scalars['String'];
-  image: AssetCreateManyInlineInput;
-  name: Scalars['String'];
-  slug?: InputMaybe<Scalars['String']>;
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  image: AssetCreateOneInlineInput;
+  namePet: Scalars['String'];
+  slug: Scalars['String'];
+  specie: Specie;
+  summary: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  whatsapp: Scalars['String'];
 };
 
 export type PetCreateManyInlineInput = {
@@ -1915,6 +1914,21 @@ export type PetManyWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
+  date?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  date_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  date_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  date_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  date_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  date_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  date_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  date_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   description_contains?: InputMaybe<Scalars['String']>;
@@ -1953,28 +1967,26 @@ export type PetManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  image_every?: InputMaybe<AssetWhereInput>;
-  image_none?: InputMaybe<AssetWhereInput>;
-  image_some?: InputMaybe<AssetWhereInput>;
-  name?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<AssetWhereInput>;
+  namePet?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
-  name_contains?: InputMaybe<Scalars['String']>;
+  namePet_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
-  name_ends_with?: InputMaybe<Scalars['String']>;
+  namePet_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  name_in?: InputMaybe<Array<Scalars['String']>>;
+  namePet_in?: InputMaybe<Array<Scalars['String']>>;
   /** All values that are not equal to given value. */
-  name_not?: InputMaybe<Scalars['String']>;
+  namePet_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
-  name_not_contains?: InputMaybe<Scalars['String']>;
+  namePet_not_contains?: InputMaybe<Scalars['String']>;
   /** All values not ending with the given string */
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  namePet_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  namePet_not_in?: InputMaybe<Array<Scalars['String']>>;
   /** All values not starting with the given string. */
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  namePet_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
-  name_starts_with?: InputMaybe<Scalars['String']>;
+  namePet_starts_with?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2013,16 +2025,32 @@ export type PetManyWhereInput = {
   slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   slug_starts_with?: InputMaybe<Scalars['String']>;
-  /** Matches if the field array contains *all* items provided to the filter and order does match */
-  tags?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array contains *all* items provided to the filter */
-  tags_contains_all?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array does not contain any of the items provided to the filter */
-  tags_contains_none?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array contains at least one item provided to the filter */
-  tags_contains_some?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
-  tags_not?: InputMaybe<Array<Scalars['String']>>;
+  specie?: InputMaybe<Specie>;
+  /** All values that are contained in given list. */
+  specie_in?: InputMaybe<Array<Specie>>;
+  /** All values that are not equal to given value. */
+  specie_not?: InputMaybe<Specie>;
+  /** All values that are not contained in given list. */
+  specie_not_in?: InputMaybe<Array<Specie>>;
+  summary?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  summary_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  summary_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  summary_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  summary_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  summary_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  summary_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  summary_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  summary_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  summary_starts_with?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2039,33 +2067,61 @@ export type PetManyWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  whatsapp?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  whatsapp_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  whatsapp_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  whatsapp_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  whatsapp_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  whatsapp_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  whatsapp_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  whatsapp_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  whatsapp_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  whatsapp_starts_with?: InputMaybe<Scalars['String']>;
 };
 
 export enum PetOrderByInput {
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
+  DateAsc = 'date_ASC',
+  DateDesc = 'date_DESC',
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
+  NamePetAsc = 'namePet_ASC',
+  NamePetDesc = 'namePet_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
-  TagsAsc = 'tags_ASC',
-  TagsDesc = 'tags_DESC',
+  SpecieAsc = 'specie_ASC',
+  SpecieDesc = 'specie_DESC',
+  SummaryAsc = 'summary_ASC',
+  SummaryDesc = 'summary_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC'
+  UpdatedAtDesc = 'updatedAt_DESC',
+  WhatsappAsc = 'whatsapp_ASC',
+  WhatsappDesc = 'whatsapp_DESC'
 }
 
 export type PetUpdateInput = {
+  date?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  image?: InputMaybe<AssetUpdateManyInlineInput>;
-  name?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<AssetUpdateOneInlineInput>;
+  namePet?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  specie?: InputMaybe<Specie>;
+  summary?: InputMaybe<Scalars['String']>;
+  whatsapp?: InputMaybe<Scalars['String']>;
 };
 
 export type PetUpdateManyInlineInput = {
@@ -2086,8 +2142,11 @@ export type PetUpdateManyInlineInput = {
 };
 
 export type PetUpdateManyInput = {
+  date?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  specie?: InputMaybe<Specie>;
+  summary?: InputMaybe<Scalars['String']>;
+  whatsapp?: InputMaybe<Scalars['String']>;
 };
 
 export type PetUpdateManyWithNestedWhereInput = {
@@ -2159,6 +2218,21 @@ export type PetWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
+  date?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  date_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  date_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  date_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  date_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  date_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  date_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  date_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   description_contains?: InputMaybe<Scalars['String']>;
@@ -2197,28 +2271,26 @@ export type PetWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  image_every?: InputMaybe<AssetWhereInput>;
-  image_none?: InputMaybe<AssetWhereInput>;
-  image_some?: InputMaybe<AssetWhereInput>;
-  name?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<AssetWhereInput>;
+  namePet?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
-  name_contains?: InputMaybe<Scalars['String']>;
+  namePet_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
-  name_ends_with?: InputMaybe<Scalars['String']>;
+  namePet_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  name_in?: InputMaybe<Array<Scalars['String']>>;
+  namePet_in?: InputMaybe<Array<Scalars['String']>>;
   /** All values that are not equal to given value. */
-  name_not?: InputMaybe<Scalars['String']>;
+  namePet_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
-  name_not_contains?: InputMaybe<Scalars['String']>;
+  namePet_not_contains?: InputMaybe<Scalars['String']>;
   /** All values not ending with the given string */
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  namePet_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  namePet_not_in?: InputMaybe<Array<Scalars['String']>>;
   /** All values not starting with the given string. */
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  namePet_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
-  name_starts_with?: InputMaybe<Scalars['String']>;
+  namePet_starts_with?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2257,16 +2329,32 @@ export type PetWhereInput = {
   slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   slug_starts_with?: InputMaybe<Scalars['String']>;
-  /** Matches if the field array contains *all* items provided to the filter and order does match */
-  tags?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array contains *all* items provided to the filter */
-  tags_contains_all?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array does not contain any of the items provided to the filter */
-  tags_contains_none?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array contains at least one item provided to the filter */
-  tags_contains_some?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
-  tags_not?: InputMaybe<Array<Scalars['String']>>;
+  specie?: InputMaybe<Specie>;
+  /** All values that are contained in given list. */
+  specie_in?: InputMaybe<Array<Specie>>;
+  /** All values that are not equal to given value. */
+  specie_not?: InputMaybe<Specie>;
+  /** All values that are not contained in given list. */
+  specie_not_in?: InputMaybe<Array<Specie>>;
+  summary?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  summary_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  summary_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  summary_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  summary_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  summary_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  summary_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  summary_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  summary_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  summary_starts_with?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2283,12 +2371,31 @@ export type PetWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  whatsapp?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  whatsapp_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  whatsapp_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  whatsapp_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  whatsapp_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  whatsapp_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  whatsapp_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  whatsapp_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  whatsapp_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  whatsapp_starts_with?: InputMaybe<Scalars['String']>;
 };
 
 /** References Pet record uniquely */
 export type PetWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
+  namePet?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
 };
 
@@ -5081,6 +5188,11 @@ export type SocialWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
+export enum Specie {
+  Cat = 'Cat',
+  Dog = 'Dog'
+}
+
 /** Stage system enumeration */
 export enum Stage {
   /** The Draft is the default stage for all your content. */
@@ -5565,6 +5677,11 @@ export type GetInfosSiteQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetInfosSiteQuery = { __typename?: 'Query', siteInfos: Array<{ __typename?: 'SiteInfo', chavePix: string, slogam: string, iconqrcode: { __typename?: 'Asset', url: string } }> };
 
+export type GetPetsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPetsQuery = { __typename?: 'Query', pets: Array<{ __typename?: 'Pet', namePet: string, slug: string, summary: string, whatsapp: string, description: string, date: any, specie: Specie, image: { __typename?: 'Asset', url: string } }> };
+
 
 export const GetInfosSiteDocument = gql`
     query GetInfosSite {
@@ -5604,3 +5721,46 @@ export function useGetInfosSiteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetInfosSiteQueryHookResult = ReturnType<typeof useGetInfosSiteQuery>;
 export type GetInfosSiteLazyQueryHookResult = ReturnType<typeof useGetInfosSiteLazyQuery>;
 export type GetInfosSiteQueryResult = Apollo.QueryResult<GetInfosSiteQuery, GetInfosSiteQueryVariables>;
+export const GetPetsDocument = gql`
+    query GetPets {
+  pets {
+    namePet
+    slug
+    summary
+    whatsapp
+    description
+    date
+    image {
+      url(transformation: {document: {output: {format: jpg}}})
+    }
+    specie
+  }
+}
+    `;
+
+/**
+ * __useGetPetsQuery__
+ *
+ * To run a query within a React component, call `useGetPetsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPetsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPetsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPetsQuery(baseOptions?: Apollo.QueryHookOptions<GetPetsQuery, GetPetsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPetsQuery, GetPetsQueryVariables>(GetPetsDocument, options);
+      }
+export function useGetPetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPetsQuery, GetPetsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPetsQuery, GetPetsQueryVariables>(GetPetsDocument, options);
+        }
+export type GetPetsQueryHookResult = ReturnType<typeof useGetPetsQuery>;
+export type GetPetsLazyQueryHookResult = ReturnType<typeof useGetPetsLazyQuery>;
+export type GetPetsQueryResult = Apollo.QueryResult<GetPetsQuery, GetPetsQueryVariables>;

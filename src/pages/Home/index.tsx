@@ -10,7 +10,6 @@ import Loading from "../../components/Loading";
 
 function Home() {
   const { data, loading } = useGetInfosSiteQuery();
-  console.log(data);
   
 
   const [copyKey, setCopyKey] = useState({
@@ -29,6 +28,7 @@ function Home() {
   return (
     <main className="mt-[71px] h-full grow p-none flex flex-col items-center lg:flex-row justify-between max-w-[1300px] mx-auto">
       <img
+        alt="two-dogs"
         className="block object-cover z-0 w-[600px] h-[670px] absolute opacity-20 lg:hidden min:object-contain"
         src={twoDogs}
       />

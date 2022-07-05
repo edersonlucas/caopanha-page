@@ -1,0 +1,14 @@
+query GetPets {
+  pets {
+    namePet
+    slug
+    summary
+    whatsapp
+    description
+    date
+    image {
+      url(transformation: {document: {output: {format: jpg}}})
+    }
+    specie
+  }
+}
