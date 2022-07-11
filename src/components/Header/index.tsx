@@ -23,22 +23,22 @@ function Header() {
           <img className="h-14 w-full" alt="logo" src={ LogoSite }/>
         </div>
         <div
-          className="block text-zinc-900 hover:text-zinc-800 sm:hidden"
+          className="block text-white hover:text-zinc-300 sm:hidden"
           onClick={openMenu}
         >
           {isOpenMenu ? <X size={35} /> : <List size={35} />}
         </div>
         <nav className="hidden text-lg items-center gap-6 sm:flex">
-          <Link to="/" className="hover:font-semibold">
+          <Link to="/" className="hover:font-medium">
             Home
           </Link>
-          <Link to="/animais" className="hover:font-semibold">
+          <Link to="/animais" className="hover:font-medium">
             Animais
           </Link>
-          <Link to="/sobre" className="hover:font-semibold">
+          <Link to="/sobre" className="hover:font-medium">
             Quem Somos
           </Link>
-          <Link to="/contato" className="hover:font-semibold">
+          <Link to="/contato" className="hover:font-medium">
             Contato
           </Link>
         </nav>
@@ -47,17 +47,17 @@ function Header() {
             isOpenMenu ? "-translate-y-0" : "translate-y-full"
           }`}
         >
-          <nav className="h-full flex flex-col items-center justify-center gap-8 text-blue-700 text-2xl">
-            <Link to="/" className="hover:font-semibold">
+          <nav className="h-full flex flex-col items-center justify-center gap-8 text-white text-2xl">
+            <Link to="/" className="hover:font-medium">
               Home
             </Link>
-            <Link to="/animais" className="hover:font-semibold">
+            <Link to="/animais" className="hover:font-medium">
               Animais
             </Link>
-            <Link to="/sobre" className="hover:font-semibold">
+            <Link to="/sobre" className="hover:font-medium">
               Quem Somos
             </Link>
-            <Link to="/contato" className="hover:font-semibold">
+            <Link to="/contato" className="hover:font-medium">
               Contato
             </Link>
           </nav>
