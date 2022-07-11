@@ -4,11 +4,10 @@ query GetPets {
     slug
     summary
     whatsapp
-    description
-    date
     image {
       url(transformation: {document: {output: {format: jpg}}})
     }
     specie
+    createdAt
   }
 }

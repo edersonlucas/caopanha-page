@@ -48,6 +48,7 @@ export type Asset = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   imagemPet: Array<Pet>;
+  imagesPet: Array<Pet>;
   /** System Locale field */
   locale: Locale;
   /** Get the other localizations for this document */
@@ -106,6 +107,19 @@ export type AssetHistoryArgs = {
 
 /** Asset system model */
 export type AssetImagemPetArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<PetOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PetWhereInput>;
+};
+
+
+/** Asset system model */
+export type AssetImagesPetArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -214,6 +228,7 @@ export type AssetCreateInput = {
   handle: Scalars['String'];
   height?: InputMaybe<Scalars['Float']>;
   imagemPet?: InputMaybe<PetCreateManyInlineInput>;
+  imagesPet?: InputMaybe<PetCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']>;
@@ -317,6 +332,9 @@ export type AssetManyWhereInput = {
   imagemPet_every?: InputMaybe<PetWhereInput>;
   imagemPet_none?: InputMaybe<PetWhereInput>;
   imagemPet_some?: InputMaybe<PetWhereInput>;
+  imagesPet_every?: InputMaybe<PetWhereInput>;
+  imagesPet_none?: InputMaybe<PetWhereInput>;
+  imagesPet_some?: InputMaybe<PetWhereInput>;
   openGraphDefaultImageSiteMetadata_every?: InputMaybe<SiteMetadataWhereInput>;
   openGraphDefaultImageSiteMetadata_none?: InputMaybe<SiteMetadataWhereInput>;
   openGraphDefaultImageSiteMetadata_some?: InputMaybe<SiteMetadataWhereInput>;
@@ -396,6 +414,7 @@ export type AssetUpdateInput = {
   handle?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Float']>;
   imagemPet?: InputMaybe<PetUpdateManyInlineInput>;
+  imagesPet?: InputMaybe<PetUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']>;
@@ -624,6 +643,9 @@ export type AssetWhereInput = {
   imagemPet_every?: InputMaybe<PetWhereInput>;
   imagemPet_none?: InputMaybe<PetWhereInput>;
   imagemPet_some?: InputMaybe<PetWhereInput>;
+  imagesPet_every?: InputMaybe<PetWhereInput>;
+  imagesPet_none?: InputMaybe<PetWhereInput>;
+  imagesPet_some?: InputMaybe<PetWhereInput>;
   mimeType?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   mimeType_contains?: InputMaybe<Scalars['String']>;
@@ -1763,7 +1785,6 @@ export type Pet = Node & {
   createdAt: Scalars['DateTime'];
   /** User that created this document */
   createdBy?: Maybe<User>;
-  date: Scalars['DateTime'];
   description: Scalars['String'];
   /** Get the document in other stages */
   documentInStages: Array<Pet>;
@@ -1772,6 +1793,7 @@ export type Pet = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   image: Asset;
+  images: Array<Asset>;
   namePet: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -1815,6 +1837,18 @@ export type PetImageArgs = {
 };
 
 
+export type PetImagesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<AssetOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AssetWhereInput>;
+};
+
+
 export type PetPublishedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
@@ -1854,9 +1888,9 @@ export type PetConnection = {
 
 export type PetCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  date: Scalars['DateTime'];
   description: Scalars['String'];
   image: AssetCreateOneInlineInput;
+  images: AssetCreateManyInlineInput;
   namePet: Scalars['String'];
   slug: Scalars['String'];
   specie: Specie;
@@ -1914,21 +1948,6 @@ export type PetManyWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
-  date?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  date_gt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  date_gte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  date_in?: InputMaybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  date_lt?: InputMaybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  date_lte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  date_not?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not contained in given list. */
-  date_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   description_contains?: InputMaybe<Scalars['String']>;
@@ -1968,6 +1987,9 @@ export type PetManyWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
   image?: InputMaybe<AssetWhereInput>;
+  images_every?: InputMaybe<AssetWhereInput>;
+  images_none?: InputMaybe<AssetWhereInput>;
+  images_some?: InputMaybe<AssetWhereInput>;
   namePet?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   namePet_contains?: InputMaybe<Scalars['String']>;
@@ -2091,8 +2113,6 @@ export type PetManyWhereInput = {
 export enum PetOrderByInput {
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
-  DateAsc = 'date_ASC',
-  DateDesc = 'date_DESC',
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
   IdAsc = 'id_ASC',
@@ -2114,9 +2134,9 @@ export enum PetOrderByInput {
 }
 
 export type PetUpdateInput = {
-  date?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
+  images?: InputMaybe<AssetUpdateManyInlineInput>;
   namePet?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
   specie?: InputMaybe<Specie>;
@@ -2142,7 +2162,6 @@ export type PetUpdateManyInlineInput = {
 };
 
 export type PetUpdateManyInput = {
-  date?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   specie?: InputMaybe<Specie>;
   summary?: InputMaybe<Scalars['String']>;
@@ -2218,21 +2237,6 @@ export type PetWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
-  date?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  date_gt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  date_gte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  date_in?: InputMaybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  date_lt?: InputMaybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  date_lte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  date_not?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not contained in given list. */
-  date_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   description_contains?: InputMaybe<Scalars['String']>;
@@ -2272,6 +2276,9 @@ export type PetWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
   image?: InputMaybe<AssetWhereInput>;
+  images_every?: InputMaybe<AssetWhereInput>;
+  images_none?: InputMaybe<AssetWhereInput>;
+  images_some?: InputMaybe<AssetWhereInput>;
   namePet?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   namePet_contains?: InputMaybe<Scalars['String']>;
@@ -5677,10 +5684,17 @@ export type GetInfosSiteQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetInfosSiteQuery = { __typename?: 'Query', siteInfos: Array<{ __typename?: 'SiteInfo', chavePix: string, slogam: string, iconqrcode: { __typename?: 'Asset', url: string } }> };
 
+export type GetPetBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetPetBySlugQuery = { __typename?: 'Query', pets: Array<{ __typename?: 'Pet', namePet: string, slug: string, whatsapp: string, description: string, createdAt: any, images: Array<{ __typename?: 'Asset', url: string }> }> };
+
 export type GetPetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPetsQuery = { __typename?: 'Query', pets: Array<{ __typename?: 'Pet', namePet: string, slug: string, summary: string, whatsapp: string, description: string, date: any, specie: Specie, image: { __typename?: 'Asset', url: string } }> };
+export type GetPetsQuery = { __typename?: 'Query', pets: Array<{ __typename?: 'Pet', namePet: string, slug: string, summary: string, whatsapp: string, specie: Specie, createdAt: any, image: { __typename?: 'Asset', url: string } }> };
 
 
 export const GetInfosSiteDocument = gql`
@@ -5721,6 +5735,48 @@ export function useGetInfosSiteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetInfosSiteQueryHookResult = ReturnType<typeof useGetInfosSiteQuery>;
 export type GetInfosSiteLazyQueryHookResult = ReturnType<typeof useGetInfosSiteLazyQuery>;
 export type GetInfosSiteQueryResult = Apollo.QueryResult<GetInfosSiteQuery, GetInfosSiteQueryVariables>;
+export const GetPetBySlugDocument = gql`
+    query GetPetBySlug($slug: String) {
+  pets(where: {slug: $slug}) {
+    namePet
+    slug
+    whatsapp
+    description
+    createdAt
+    images {
+      url(transformation: {document: {output: {format: jpg}}})
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetPetBySlugQuery__
+ *
+ * To run a query within a React component, call `useGetPetBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPetBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPetBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useGetPetBySlugQuery(baseOptions?: Apollo.QueryHookOptions<GetPetBySlugQuery, GetPetBySlugQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPetBySlugQuery, GetPetBySlugQueryVariables>(GetPetBySlugDocument, options);
+      }
+export function useGetPetBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPetBySlugQuery, GetPetBySlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPetBySlugQuery, GetPetBySlugQueryVariables>(GetPetBySlugDocument, options);
+        }
+export type GetPetBySlugQueryHookResult = ReturnType<typeof useGetPetBySlugQuery>;
+export type GetPetBySlugLazyQueryHookResult = ReturnType<typeof useGetPetBySlugLazyQuery>;
+export type GetPetBySlugQueryResult = Apollo.QueryResult<GetPetBySlugQuery, GetPetBySlugQueryVariables>;
 export const GetPetsDocument = gql`
     query GetPets {
   pets {
@@ -5728,12 +5784,11 @@ export const GetPetsDocument = gql`
     slug
     summary
     whatsapp
-    description
-    date
     image {
       url(transformation: {document: {output: {format: jpg}}})
     }
     specie
+    createdAt
   }
 }
     `;

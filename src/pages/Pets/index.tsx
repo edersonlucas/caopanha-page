@@ -3,8 +3,6 @@ import PetCard from "../../components/PetCard";
 import { useGetPetsQuery } from "../../graphql/generated";
 function Pets () {
   const { data, loading } = useGetPetsQuery();
-
-  console.log(data);
   
 
   if (loading) {

@@ -1,0 +1,12 @@
+query GetPetBySlug($slug: String) {
+  pets(where: {slug: $slug}) {
+    namePet
+    slug
+    whatsapp
+    description
+    createdAt
+    images {
+      url(transformation: {document: {output: {format: jpg}}})
+    }
+  }
+}

@@ -5,8 +5,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 interface PetProp {
   Pet: {
     specie: 'Dog' | 'Cat';
-    date: Date;
-    description: string;
+    createdAt: Date;
     namePet: string;
     slug: string;
     summary: string;
@@ -18,8 +17,8 @@ interface PetProp {
 }
 
 function PetCard({ Pet }: PetProp) {
-  const {  specie, date, namePet, summary, whatsapp, image } = Pet
-  const dateFormatted = format(new Date(date), "d' de 'MMMM' de 'yyyy", {
+  const {  specie, createdAt, namePet, summary, whatsapp, image } = Pet
+  const dateFormatted = format(new Date(createdAt), "d' de 'MMMM' de 'yyyy", {
     locale: ptBR,
   })
   
