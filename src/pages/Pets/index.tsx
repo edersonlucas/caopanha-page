@@ -15,7 +15,7 @@ function Pets () {
     );
   }
   return (
-    <main className="flex flex-col items-center grow bg-yellow-500 text-white mt-[71px]">
+    <main className="flex flex-col items-center grow bg-blue-700 text-white mt-[71px]">
       <div className="flex w-full max-w-[1100px] items-center justify-center m-4 flex-wrap mx-auto">
         {data?.pets.map((pet) => <PetCard Pet={ pet } />)}
       </div>

@@ -2,8 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+html::-webkit-scrollbar {
+  width: 6px;
+}
+
+html::-webkit-scrollbar-track {
+  @apply bg-blue-700;
+}
+
+html::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+html {
+  scrollbar-color: #60A5FA #0474BE;
+  scrollbar-width: thin;
+}
+html::-webkit-scrollbar-thumb {
+  @apply bg-blue-400;
+  border-radius: 20px;
+}
+
 body {
-  @apply bg-gradient-to-r from-yellow-300 to-yellow-500 text-black;
+  @apply bg-gradient-to-r from-blue-700 to-blue-800 text-zinc-100;
   -webkit-font-smoothing: antialiased;
 }
 

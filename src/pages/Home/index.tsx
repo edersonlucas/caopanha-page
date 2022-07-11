@@ -45,7 +45,7 @@ function Home() {
             icon={data?.siteInfos[0]?.iconqrcode?.url}
           />
           <span className="text-1xl">Toda e qualquer ajuda será bem vinda</span>
-          <span className="bg-white text-sm mt-3 p-1 border text-center rounded border-dashed border-red-700 min:text-base">
+          <span className="bg-white text-zinc-900 text-sm mt-3 p-1 border text-center rounded border-dashed border-red-700 min:text-base">
             {data?.siteInfos[0]?.chavePix || "https://www.instagram.com/caopanha/"}
           </span>
           <CopyToClipboard
